@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const apiURL = `http://starlord.hackerearth.com/kickstarter`
 
@@ -6,7 +7,6 @@ class KickStarter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            projects: [],
             requestFailed: false
         }
     }
@@ -36,11 +36,22 @@ class KickStarter extends Component {
         if(this.state.projectsData){
             const listItems = this.state.projectsData.map((proj) => {
                 return(
-                    <li>{proj.title}</li>
+                    <div key={proj.title.toString()} className="card">
+                        <div className="card-body">
+                            <p>Blurb: {proj.blurb}</p>
+                            <p>By: {proj.by}</p>
+                            <p>Country: {proj.country}</p>
+                            <p>Currency: {proj.currency}</p>
+                            <p>Location: {proj.location}</p>
+                            <p>State: {proj.state}</p>
+                            <p>Title: {proj.title}</p>
+                            <p>Url: {proj.url}</p>
+                        </div>
+                    </div>
                 )
             });
             return(
-                <ul>{listItems}</ul>
+                <div>{listItems}</div>
             )
         }
     }
@@ -51,8 +62,10 @@ class KickStarter extends Component {
         if (!this.state.projectsData) return <p>Loading...</p>
         return (
             <div>
-                Project Titles:
+            <h2>Projects</h2>
+            <div className="projTitles">
                 {this.getProjectsList()}
+            </div>
             </div>
         )
     }
