@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import logo from './logo.png';
+
 
 const apiURL = `http://starlord.hackerearth.com/kickstarter`
 
@@ -9,35 +11,36 @@ class KickStarter extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            selectedOption: '',
             requestFailed: false
         }
     }
 
     componentDidMount() {
         fetch(apiURL)
-        .then(response => {
-            if (!response.ok) {
-                throw Error("Network request failed")
-            }
+            .then(response => {
+                if (!response.ok) {
+                    throw Error("Network request failed")
+                }
 
-            return response
-        })
-        .then(d => d.json())
-        .then(d => {
-            this.setState({
-                projectsData: d
+                return response
             })
-        }, () => {
-            this.setState({
-                requestFailed: true
+            .then(d => d.json())
+            .then(d => {
+                this.setState({
+                    projectsData: d
+                })
+            }, () => {
+                this.setState({
+                    requestFailed: true
+                })
             })
-        })
     }
 
     getProjectsList() {
-        if(this.state.projectsData){
+        if (this.state.projectsData) {
             const listItems = this.state.projectsData.map((proj) => {
-                return(
+                return (
                     <div key={proj.title.toString()} className="card">
                         <div className="card-body">
                             <p>Blurb: {proj.blurb}</p>
@@ -52,22 +55,40 @@ class KickStarter extends Component {
                     </div>
                 )
             });
-            return(
+            return (
                 <div>{listItems}</div>
             )
         }
     }
 
+    handelChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Selected: ${selectedOption.label}`);
+    }
+
     render() {
+
+        const { selectedOption } = this.state;
+        const value = selectedOption && selectedOption.value;
 
         if (this.state.requestFailed) return <p>Failed!</p>
         if (!this.state.projectsData) return <p>Loading...</p>
         return (
             <div className="cleartrip">
-            <h2>Projects</h2>
-            <div className="projLst">
-                {this.getProjectsList()}
-            </div>
+                <img src={logo} alt="logo" className="App-logo"/>
+                <h2>Projects</h2>
+                <Select
+                    name="form-field-name"
+                    value={value}
+                    onChange={this.handleChange}
+                    options={[
+                        { value: 'one', label: 'One' },
+                        { value: 'two', label: 'Two' },
+                    ]}
+                />
+                <div className="projLst">
+                    {this.getProjectsList()}
+                </div>
             </div>
         )
     }
