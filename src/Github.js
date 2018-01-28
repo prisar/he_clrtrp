@@ -4,6 +4,10 @@ const urlForUsername = username =>
     `https://api.github.com/users/${username}`
 
 class GitHub extends Component {
+    constructor(props){
+        super(props)
+        this.state = {}
+    }
 
     componentDidMount(){
         fetch(urlForUsername(this.props.username))
@@ -16,9 +20,11 @@ class GitHub extends Component {
     }
 
     render(){
+
+        if(!this.state.githubData) return <p>Loading...</p>
         return (
             <div>
-                <p>Loading...</p>
+                <h2>{this.state.githubData.name}</h2>
             </div>
         )
     }
