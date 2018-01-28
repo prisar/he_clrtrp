@@ -61,9 +61,9 @@ class KickStarter extends Component {
         if (this.state.requestFailed) return <p>Failed!</p>
         if (!this.state.projectsData) return <p>Loading...</p>
         return (
-            <div>
+            <div className="cleartrip">
             <h2>Projects</h2>
-            <div className="projTitles">
+            <div className="projLst">
                 {this.getProjectsList()}
             </div>
             </div>

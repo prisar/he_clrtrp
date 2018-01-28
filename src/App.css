@@ -27,7 +27,25 @@
   to { transform: rotate(360deg); }
 }
 
-.projTitles {
+.projLst {
   text-align: center;
   color: blue;
+  word-wrap: break-word;
+}
+
+.cleartrip {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #36c;
+  background-color:orange;
+}
+
+.card {
+  color: #222;
+  background-color: azure;
+}
+
+.card-body {
+  word-wrap: break-word;
+  line-break: normal;
+  color: #777;
 }
