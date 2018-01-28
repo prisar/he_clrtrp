@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const apiURL = `http://starlord.hackerearth.com/kickstarter`
 
