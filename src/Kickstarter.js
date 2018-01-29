@@ -42,14 +42,21 @@ class KickStarter extends Component {
             const listItems = this.state.projectsData.map((proj) => {
                 return (
                     <div key={proj.title.toString()} className="card">
+                        <div className="card-header">
+                            <p>Sr No: {proj['s.no']}</p>
+                        </div>
                         <div className="card-body">
-                            <p>Blurb: {proj.blurb}</p>
+                            <p>Blurb: {proj['blurb']}</p>
+                            <p>Date: {Date.parse(proj['end.time'])}</p>
+                            <p>Date: {proj['end.time'].slice(0,10)}</p>
                             <p>By: {proj.by}</p>
                             <p>Country: {proj.country}</p>
                             <p>Currency: {proj.currency}</p>
                             <p>Location: {proj.location}</p>
                             <p>State: {proj.state}</p>
                             <p>Title: {proj.title}</p>
+                        </div>
+                        <div className="card-footer">
                             <p>Url: {proj.url}</p>
                         </div>
                     </div>
@@ -75,7 +82,7 @@ class KickStarter extends Component {
         if (!this.state.projectsData) return <p>Loading...</p>
         return (
             <div className="cleartrip">
-                <img src={logo} alt="logo" className="App-logo"/>
+                <img src={logo} alt="logo" className="App-logo" />
                 <h2>Projects</h2>
                 <Select
                     name="form-field-name"
